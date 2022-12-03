@@ -4,6 +4,7 @@ import LoginLayout from "./components/layout/LoginLayout";
 import MainLayout from "./components/layout/MainLayout";
 import HomeVideoScreen from "./components/HomeVideoScreen";
 import { useSelector } from "react-redux";
+import ViewVideoLayout from "./components/layout/ViewVideoLayout";
 
 
 
@@ -23,7 +24,8 @@ function App() {
     <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route path="/" element={<HomeVideoScreen />} />
-          <Route path="searchbar" element= {<HomeVideoScreen />} />
+          <Route path="search" element={<h1>search</h1>} />
+          <Route path="watch/:id" element={<ViewVideoLayout/>}/>
         </Route>
         <Route path="/auth" element={<LoginLayout />} />
     </Routes>
