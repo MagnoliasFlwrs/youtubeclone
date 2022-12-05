@@ -8,7 +8,7 @@ const popularVideoService = {
                 part: 'snippet, contentDetails,statistics',
                 chart :'mostPopular',
                 regionCode : 'BY',
-                maxResults : 15,
+                maxResults : 9,
                 pageToken : '' ,
             }
         })

@@ -14,20 +14,18 @@ function App() {
   const navigate = useNavigate()
   const token = useSelector(state => state.auth.token)
   useEffect(() => {
-    if(token) {
-      navigate('/')
-    } else {
-      navigate('/auth')
+    if(!token) {
+      navigate('auth')
     }
   },[token])
   return (
     <Routes>
         <Route path="/" element={<MainLayout />}>
-          <Route path="/" element={<HomeVideoScreen />} />
+          <Route path="" element={<HomeVideoScreen />} />
           <Route path="search" element={<h1>search</h1>} />
           <Route path="watch/:id" element={<ViewVideoLayout/>}/>
         </Route>
-        <Route path="/auth" element={<LoginLayout />} />
+        <Route path="auth" element={<LoginLayout />} />
     </Routes>
   );
 }

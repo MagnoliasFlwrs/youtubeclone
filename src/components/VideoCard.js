@@ -15,45 +15,50 @@ export default function VideoCard( {video}) {
     const _duration = moment.utc(seconds * 1000).format('mm:ss')
 
     const {id, snippet:{channelId , channelTitle, title, publishedAt, thumbnails:{medium}}} = video
-    useEffect(() => {
-        const getVideoDetails = async () => {
-            const {data:{items}} = await request('/videos' , {
-                params: {
-                    part: 'contentDetails,statistics',
-                    id : id,
-                }
-            })
-            setDuration(items[0].contentDetails.duration)
-            setViews(items[0].statistics.viewCount)
-        }
-        getVideoDetails()
-    },[id])
-    useEffect(() => {
-        const getChannelIcon = async () => {
-            const {data:{items}} = await request('/channels' , {
-                params: {
-                    part: 'snippet',
-                    id : channelId,
-                }
-            })
-            setchannelIcon(items[0].snippet.thumbnails.default)
-        }
-        getChannelIcon()
-    },[channelId])
+
+    // useEffect(() => {
+    //     const getVideoDetails = async () => {
+    //         const {data:{items}} = await request('/videos' , {
+    //             params: {
+    //                 part: 'contentDetails,statistics',
+    //                 id : id,
+    //             }
+    //         })
+    //         setDuration(items[0].contentDetails.duration)
+    //         setViews(items[0].statistics.viewCount)
+    //     }
+    //     getVideoDetails()
+    // },[id])
+    // useEffect(() => {
+    //     const getChannelIcon = async () => {
+    //         const {data:{items}} = await request('/channels' , {
+    //             params: {
+    //                 part: 'snippet',
+    //                 id : channelId,
+    //             }
+    //         })
+    //         setchannelIcon(items[0].snippet.thumbnails.default)
+    //     }
+    //     getChannelIcon()
+    // },[channelId])
   return (
     <VideoCardContainer>
         <div className='video__image'>
             <img src={medium.url} alt=''></img>
-            <span>{_duration}</span>
+            {/* <span>{_duration}</span> */}
+            <span>3:55</span>
         </div>
         <div className='video__name'>
-            <img src={channelIcon?.url} alt=''>
+            <img src={medium?.url} alt=''>
             </img>
             <h2 className='video__tittle'>{title}</h2>
         </div>
         <div className='video__details'>
-            <span>
+            {/* <span>
                 <AiFillEye/> {numeral(views).format('0.a')} просмотров ·
+            </span> */}
+            <span>
+                <AiFillEye/> 4875 просмотров ·
             </span>
             <span className='date'>{moment(publishedAt).fromNow()} · </span>
             <span className='channel__tittle'>{channelTitle} </span>

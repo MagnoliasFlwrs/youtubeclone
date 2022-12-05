@@ -34,6 +34,7 @@ const getVideoSlice = createSlice({
         [getPopularVideo.fulfilled]: (state, action) => {
             state.videoList = action.payload
             state.nextPageToken = action.nextPageToken
+            state.isLoading = false
             state.activeCategory = action.payload.activeCategory
         },
         [getPopularVideo.rejected]: (state, action) => {
@@ -44,6 +45,7 @@ const getVideoSlice = createSlice({
         },
         [getCategoryVideo.fulfilled]: (state, action) => {
           state.videoList = action.payload
+          state.isLoading = false
           state.nextPageToken = action.nextPageToken
           state.activeCategory = action.payload.activeCategory
         },

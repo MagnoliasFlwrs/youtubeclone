@@ -1,18 +1,13 @@
 import React from 'react'
-import { Outlet } from 'react-router-dom'
+import { Outlet, Link } from 'react-router-dom'
 import styled from 'styled-components'
 import ContainerForHeader from '../ContainerForHeader'
 import Flex from '../Flex'
 import Sidebar from '../sidebar'
-import HomeVideoScreen from '../HomeVideoScreen'
-// import { useEffect } from 'react'
-// import { useDispatch } from 'react-redux'
-// import { getPopularVideo } from '../../redux/slices/mostPopularPlaylistSlice'
+
 
 
 export default function MainLayout() {
-
-
   return (
     <div className="app">
     <MainContainer>
@@ -22,6 +17,7 @@ export default function MainLayout() {
       <Flex>
         <Sidebar/>
         <Outlet/>
+        <Link to="search">Search</Link>
       </Flex>
     </MainContainer>
   </div>

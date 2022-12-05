@@ -5,7 +5,7 @@ const categoryVideoService = {
         const {data} = await request('/search' , {
             params: {
                 part: 'snippet',
-                maxResults : 15,
+                maxResults : 9,
                 pageToken : '' ,
                 q: value,
                 type: 'video',
