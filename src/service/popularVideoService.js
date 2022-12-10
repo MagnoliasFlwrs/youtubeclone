@@ -7,8 +7,8 @@ const popularVideoService = {
             params: {
                 part: 'snippet, contentDetails,statistics',
                 chart :'mostPopular',
-                regionCode : 'BY',
-                maxResults : 9,
+                regionCode : 'RU',
+                maxResults : 50,
                 pageToken : '' ,
             }
         })

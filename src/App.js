@@ -23,8 +23,8 @@ function App() {
         <Route path="/" element={<MainLayout />}>
           <Route path="" element={<HomeVideoScreen />} />
           <Route path="search" element={<h1>search</h1>} />
-          <Route path="watch/:id" element={<ViewVideoLayout/>}/>
         </Route>
+        <Route path="watch/:id" element={<ViewVideoLayout/>}/>
         <Route path="auth" element={<LoginLayout />} />
     </Routes>
   );

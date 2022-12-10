@@ -5,20 +5,26 @@ import Flex from "./Flex";
 
 function ContainerForHeader() {
     return (
-        <Flex>
+        <FlexCont>
             <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg" alt="" width={150} height={50}/>
             <InputContainer >
                 <input type="text" placeholder="Введите запрос" />
                 <button type="submit"><BiSearch/></button>
             </InputContainer>
             <AuthBtn/>
-        </Flex>
+        </FlexCont>
     )
 
 }
+const FlexCont = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+`
 const InputContainer = styled.div`
     display: flex;
     align-items: center;
+    justify-content: space-between;
     padding: 30px 0;
     input {
         width: 600px;

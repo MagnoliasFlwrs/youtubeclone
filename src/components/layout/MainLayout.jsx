@@ -17,7 +17,6 @@ export default function MainLayout() {
       <Flex>
         <Sidebar/>
         <Outlet/>
-        <Link to="search">Search</Link>
       </Flex>
     </MainContainer>
   </div>

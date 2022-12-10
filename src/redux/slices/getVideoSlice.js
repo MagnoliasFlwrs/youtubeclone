@@ -1,6 +1,9 @@
 import { createSlice , createAsyncThunk} from "@reduxjs/toolkit";
 import popularVideoService from "../../service/popularVideoService";
 import categoryVideoService from "../../service/categoryVideoService";
+import getVideoDetailsByIdService from "../../service/getVideoByIdService";
+import getVideoChannelDetailsService from "../../service/getVideoChannelDetailsService";
+import getSubscribeStatusService from "../../service/getSubscribeStatusService";
 
 export const getPopularVideo =  createAsyncThunk('popularVideo/getPopularVideo', async ( _, {rejectWithValue}) => {
     try {
@@ -18,6 +21,30 @@ export const getCategoryVideo =  createAsyncThunk('categoryVideo/getCategoryVide
     return rejectWithValue(e)
   }
 })
+export const getVideoDetailsById =  createAsyncThunk('videoDetails/getVideoDetailsById', async ( id, {rejectWithValue}) => {
+  try {
+    const result = await getVideoDetailsByIdService.getVideo(id)
+    return result.items[0]
+  } catch (e) {
+    return rejectWithValue(e)
+  }
+})
+export const getVideoChannelDetails =  createAsyncThunk('videoChannelDetails/getVideoChannelDetails', async ( channelId, {rejectWithValue}) => {
+  try {
+    const result = await getVideoChannelDetailsService.getVideo(channelId)
+    return result.items[0]
+  } catch (e) {
+    return rejectWithValue(e)
+  }
+})
+export const getSubscribeStatus =  createAsyncThunk('subscribeStatus/getSubscribeStatus', async ( channelId, {rejectWithValue}) => {
+  try {
+    const result = await getSubscribeStatusService.getStatus(channelId)
+    return result.items
+  } catch (e) {
+    return rejectWithValue(e)
+  }
+})
 const getVideoSlice = createSlice({
     name: 'video',
     initialState: {
@@ -25,7 +52,10 @@ const getVideoSlice = createSlice({
       isLoading: false,
       error: '',
       nextPageToken: null,
-      activeCategory: 'All'
+      activeCategory: 'All',
+      selectedVideo: null,
+      currentChannel: null,
+      subscribeStatus: null,
     },
     extraReducers: {
         [getPopularVideo.pending]: (state, action) => {
@@ -52,6 +82,37 @@ const getVideoSlice = createSlice({
         [getCategoryVideo.rejected]: (state, action) => {
             state.error = action.payload.message
         },
+        [getVideoDetailsById.pending]: (state, action) => {
+          state.isLoading = true
+        },
+        [getVideoDetailsById.fulfilled]: (state, action) => {
+            state.selectedVideo = action.payload
+            state.isLoading = false
+        },
+        [getVideoDetailsById.rejected]: (state, action) => {
+            state.error = action.payload.message
+        },
+        [getVideoChannelDetails.pending]: (state, action) => {
+          state.isLoading = true
+        },
+        [getVideoChannelDetails.fulfilled]: (state, action) => {
+            state.currentChannel = action.payload
+            state.isLoading = false
+        },
+        [getVideoChannelDetails.rejected]: (state, action) => {
+            state.error = action.payload.message
+        },
+        [getSubscribeStatus.pending]: (state, action) => {
+          state.isLoading = true
+        },
+        [getSubscribeStatus.fulfilled]: (state, action) => {
+            state.subscribeStatus = action.payload
+            state.isLoading = false
+        },
+        [getSubscribeStatus.rejected]: (state, action) => {
+            state.error = action.payload.message
+        },
+
 
     }
   })
