@@ -15,6 +15,7 @@ import { getVideoDetailsById } from '../../redux/slices/getVideoSlice'
 export default function ViewVideoLayout() {
     const {id} = useParams()
     const {selectedVideo , isLoading } = useSelector(state => state.video)
+
     const dispatch =  useDispatch()
     useEffect(() => {
         dispatch(getVideoDetailsById(id))
@@ -22,7 +23,7 @@ export default function ViewVideoLayout() {
   return (
     <>
         {
-            selectedVideo?
+            selectedVideo ?
             <WatchContainer>
                 <ContainerForHeader/>
                 <VideoView>
@@ -31,8 +32,8 @@ export default function ViewVideoLayout() {
                                 <iframe src={`https://www.youtube.com/embed/${id}`} frameBorder='0' tittle={selectedVideo?.snippet?.title}
                                 allowFullScreen width='100%' height='100%'></iframe>
                             </div>
-                        <VideoDetails selectedVideo={selectedVideo} videoId={id}/>
-                        <Comments/>
+                        <VideoDetails selectedVideo={selectedVideo}  videoId={id}/>
+                        <Comments videoId={id}/>
                     </div>
                     <div className='horisontal__wrapper'>
                         {[...Array(10)].map(() => <HorisontalVideoCard/>)}

@@ -8,13 +8,15 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getVideoChannelDetails } from '../redux/slices/getVideoSlice'
 import { getSubscribeStatus } from '../redux/slices/getVideoSlice'
+import { HalfMalf } from 'react-spinner-animated';
+import 'react-spinner-animated/dist/index.css'
 
 export default function VideoDetails( {selectedVideo ,videoId}) {
     const {snippet: {channelId , description, channelTitle, title, publishedAt} , statistics:{viewCount, likeCount, commentCount}} = selectedVideo
     const dispatch = useDispatch()
-    const { currentChannel } = useSelector(state => state.video)
+
+    const {subscribeStatus , currentChannel } = useSelector(state => state.video)
     const {snippet:channelSnippet , statistics: channelStatistics} = currentChannel
-    const {subscribeStatus } = useSelector(state => state.video)
     const __subscribeStatus = subscribeStatus.length !== 0
 
     useEffect(()=> {
@@ -26,50 +28,59 @@ export default function VideoDetails( {selectedVideo ,videoId}) {
 
     }
   return (
-    <VideoDetailsContainer >
-        <h2>{title}</h2>
-        <div className='info__details'>
-            <div className='channel__info'>
-                <img src={channelSnippet?.thumbnails?.default?.url} alt="" />
-                <div className='followers'>
-                    <h3>{channelTitle}</h3>
-                    <p> {numeral(channelStatistics?.subscriberCount).format('0.a')} подписчиков</p>
-                </div>
-                <button className={__subscribeStatus? 'gray__btn' : 'black__btn'} onClick={handleSubscribe}>{__subscribeStatus? 'Вы подписаны' : 'Подписаться'}</button>
-            </div>
-            <div className='liked'>
-                <div className='like__wrap'>
-                    <BiLike/> {numeral(likeCount).format('0.a')}
-                </div>
-                <div className='like__wrap sec'>
-                    <BiDislike/>
-                </div>
+    <>
+        {
+            currentChannel && subscribeStatus ?
+                    <VideoDetailsContainer >
+                <h2>{title}</h2>
+                <div className='info__details'>
+                    <div className='channel__info'>
+                        <img src={channelSnippet?.thumbnails?.default?.url} alt="" />
+                        <div className='followers'>
+                            <h3>{channelTitle}</h3>
+                            <p> {numeral(channelStatistics?.subscriberCount).format('0.a')} подписчиков</p>
+                        </div>
+                        <button className={__subscribeStatus? 'gray__btn' : 'black__btn'} onClick={handleSubscribe}>{__subscribeStatus? 'Вы подписаны' : 'Подписаться'}</button>
+                    </div>
+                    <div className='liked'>
+                        <div className='like__wrap'>
+                            <BiLike/> {numeral(likeCount).format('0.a')}
+                        </div>
+                        <div className='like__wrap sec'>
+                            <BiDislike/>
+                        </div>
 
-            </div>
-        </div>
-        <div className='description'>
-            <div className='span__wrapper'>
-                <span>{numeral(viewCount).format('0.a')} просмотров</span>
-                <span> {moment(publishedAt).fromNow()}</span>
-            </div>
-            <ShowMoreText
-                lines={3}
-                more="Show more"
-                less="Show less"
-                className="content-css"
-                anchorClass="show-more-less-clickable"
-                expanded={false}
-                width={280}
-                truncatedEndingComponent={"... "}>
+                    </div>
+                </div>
+                <div className='description'>
+                    <div className='span__wrapper'>
+                        <span>{numeral(viewCount).format('0.a')} просмотров</span>
+                        <span> {moment(publishedAt).fromNow()}</span>
+                    </div>
+                    <ShowMoreText
+                        lines={3}
+                        more="Show more"
+                        less="Show less"
+                        className="content-css"
+                        anchorClass="show-more-less-clickable"
+                        expanded={false}
+                        width={280}
+                        truncatedEndingComponent={"... "}>
 
-                <p>s{description}
-                </p>
-            </ShowMoreText>
-        </div>
-        <div>
+                        <p>{description}
+                        </p>
+                    </ShowMoreText>
+                </div>
+                <div>
 
-        </div>
-    </VideoDetailsContainer>
+                </div>
+            </VideoDetailsContainer>
+            :
+            <VideoDetailsContainer>
+                <HalfMalf text={"Loading"} bgColor={"#ffffff"} width={"200px"} height={"200px"} center={true} />
+            </VideoDetailsContainer>
+        }
+    </>
   )
 }
 const VideoDetailsContainer = styled.div`

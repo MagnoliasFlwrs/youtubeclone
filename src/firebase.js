@@ -12,3 +12,14 @@ const firebaseConfig = {
   };
 export const app = initializeApp(firebaseConfig);
 
+// const firebaseConfig = {
+//   apiKey: "AIzaSyCgshZUy9ba4hIPyYVYn3I2QHibGrDJA8o",
+//   authDomain: "clone-371418.firebaseapp.com",
+//   projectId: "youtube-clone-371418",
+//   storageBucket: "youtube-clone-371418.appspot.com",
+//   messagingSenderId: "642815598248",
+//   appId: "1:642815598248:web:97d4db670032c2df7cac9d"
+// };
+
+
+// const app = initializeApp(firebaseConfig);

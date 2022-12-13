@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { AiTwotoneHome, AiFillLike } from 'react-icons/ai';
 import {MdOutlineSubscriptions} from 'react-icons/md';
@@ -13,20 +13,31 @@ import { logOut } from "../redux/slices/authSlice";
 
 function Sidebar() {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
+    // const logOutHandler = () => {
+    //     const auth = getAuth();
+    //     localStorage.removeItem('authToken')
+    //     localStorage.removeItem('userProfile')
+    //     signOut(auth).then(() => {
+    //         dispatch(logOut({
+    //             isAuth: false,
+    //             id: null,
+    //             token: null,
+    //             profile:null,
+    //         }))
+    //     }).catch((error) => {
+    //         console.log(error)
+    // });
+    // }
     const logOutHandler = () => {
-        const auth = getAuth();
         localStorage.removeItem('authToken')
-        localStorage.removeItem('userProfile')
-        signOut(auth).then(() => {
-            dispatch(logOut({
-                isAuth: false,
-                id: null,
-                token: null,
-                profile:null,
-            }))
-        }).catch((error) => {
-            console.log(error)
-});
+        dispatch(logOut({
+            isAuth: false,
+            id: null,
+            token: null,
+            profile:{},
+        }))
+        navigate('/auth')
     }
     return (
         <ColumnContainer>

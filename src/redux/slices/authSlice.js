@@ -7,7 +7,7 @@ const authSlice = createSlice({
       token : localStorage.getItem('authToken') ? localStorage.getItem('authToken'):null,
       error: '',
       id : null,
-      profile: localStorage.getItem('userProfile')? JSON.parse(localStorage.getItem('userProfile')):null,
+      profile: {},
     },
     reducers: {
         logIn(state, action) {
@@ -21,7 +21,7 @@ const authSlice = createSlice({
             state.id = action.payload.id
         },
         getProfile(state,action) {
-            state.profile = action.payload.profile
+            state.profile = action.payload
         }
 
     },

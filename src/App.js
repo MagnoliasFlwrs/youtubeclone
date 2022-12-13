@@ -5,6 +5,7 @@ import MainLayout from "./components/layout/MainLayout";
 import HomeVideoScreen from "./components/HomeVideoScreen";
 import { useSelector } from "react-redux";
 import ViewVideoLayout from "./components/layout/ViewVideoLayout";
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 
 
@@ -19,7 +20,8 @@ function App() {
     }
   },[token])
   return (
-    <Routes>
+    <GoogleOAuthProvider>
+      <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route path="" element={<HomeVideoScreen />} />
           <Route path="search" element={<h1>search</h1>} />
@@ -27,6 +29,8 @@ function App() {
         <Route path="watch/:id" element={<ViewVideoLayout/>}/>
         <Route path="auth" element={<LoginLayout />} />
     </Routes>
+    </GoogleOAuthProvider>
+
   );
 }
 
