@@ -5,6 +5,7 @@ import getVideoDetailsByIdService from "../../service/getVideoByIdService";
 import getVideoChannelDetailsService from "../../service/getVideoChannelDetailsService";
 import getSubscribeStatusService from "../../service/getSubscribeStatusService";
 import getCommentListService from "../../service/getCommentListService";
+import getRelatedVideoService from "../../service/getRelatedVideoService"
 
 export const getPopularVideo =  createAsyncThunk('popularVideo/getPopularVideo', async ( _, {rejectWithValue}) => {
     try {
@@ -54,6 +55,14 @@ export const getCommentList =  createAsyncThunk('comments/getCommentList', async
     return rejectWithValue(e)
   }
 })
+export const getRelatedVideo =  createAsyncThunk('relatedVideo/getRelatedVideo', async ( videoId, {rejectWithValue}) => {
+  try {
+    const result = await getRelatedVideoService.getVideo(videoId)
+    return result.items
+  } catch (e) {
+    return rejectWithValue(e)
+  }
+})
 const getVideoSlice = createSlice({
     name: 'video',
     initialState: {
@@ -66,6 +75,7 @@ const getVideoSlice = createSlice({
       currentChannel: {},
       subscribeStatus: [],
       commentList:[],
+      relatedVideo:[],
     },
     extraReducers: {
         [getPopularVideo.pending]: (state, action) => {
@@ -130,6 +140,16 @@ const getVideoSlice = createSlice({
             state.isLoading = false
         },
         [getCommentList.rejected]: (state, action) => {
+            state.error = action.payload.message
+        },
+        [getRelatedVideo.pending]: (state, action) => {
+          state.isLoading = true
+        },
+        [getRelatedVideo.fulfilled]: (state, action) => {
+            state.relatedVideo = action.payload
+            state.isLoading = false
+        },
+        [getRelatedVideo.rejected]: (state, action) => {
             state.error = action.payload.message
         },
 
