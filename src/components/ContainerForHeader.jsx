@@ -2,11 +2,16 @@ import React from "react";
 import styled from "styled-components"
 import {BiSearch} from "react-icons/bi"
 import Flex from "./Flex";
+import { useNavigate } from "react-router";
 
 function ContainerForHeader() {
+    const navigate = useNavigate()
+    const handleStart = () => {
+        navigate('/')
+    }
     return (
         <FlexCont>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg" alt="" width={150} height={50}/>
+            <img onClick={handleStart} src="https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg" alt="" width={150} height={50}/>
             <InputContainer >
                 <input type="text" placeholder="Введите запрос" />
                 <button type="submit"><BiSearch/></button>

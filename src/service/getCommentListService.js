@@ -2,12 +2,14 @@ import request from './api'
 
 const getCommentListService = {
     async getComments(videoId) {
-        const {data} = await request('/comments' , {
+        const {data} = await request('/commentThreads' , {
             params: {
                 part: 'snippet',
-                id : videoId,
-                maxResults:30,
+                videoId : videoId,
             },
+            // headers: {
+            //     Authorization: `Bearer ${localStorage.getItem('authToken')}`
+            // }
 
         })
         console.log(data)

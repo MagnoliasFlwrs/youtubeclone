@@ -10,20 +10,22 @@ import 'react-spinner-animated/dist/index.css'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { useEffect } from 'react'
-import { getVideoDetailsById } from '../../redux/slices/getVideoSlice'
+import { getVideoDetailsById , getRelatedVideo } from '../../redux/slices/getVideoSlice'
+
 
 export default function ViewVideoLayout() {
     const {id} = useParams()
-    const {selectedVideo , isLoading } = useSelector(state => state.video)
+    const {selectedVideo , isLoading, relatedVideo} = useSelector(state => state.video)
 
     const dispatch =  useDispatch()
     useEffect(() => {
         dispatch(getVideoDetailsById(id))
+        dispatch(getRelatedVideo(id))
     },[dispatch,id])
   return (
     <>
         {
-            selectedVideo ?
+            selectedVideo  ?
             <WatchContainer>
                 <ContainerForHeader/>
                 <VideoView>
@@ -36,7 +38,7 @@ export default function ViewVideoLayout() {
                         <Comments videoId={id}/>
                     </div>
                     <div className='horisontal__wrapper'>
-                        {[...Array(10)].map(() => <HorisontalVideoCard/>)}
+                            {relatedVideo.filter(video => video.snippet).map(video => <HorisontalVideoCard video ={video} key={video.id.videoId}> </HorisontalVideoCard>)}
                     </div>
                 </VideoView>
             </WatchContainer> :
@@ -69,7 +71,7 @@ const VideoView = styled.div`
         margin-bottom: 15px;
     }
     .horisontal__wrapper {
-        width: 30%;
+        width: 32%;
     }
 
 `

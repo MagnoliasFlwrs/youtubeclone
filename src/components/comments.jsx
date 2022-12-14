@@ -13,9 +13,9 @@ export default function Comments(videoId) {
   const dispatch = useDispatch()
   const {commentList , isLoading } = useSelector(state => state.video)
 
-  useEffect(()=> {
-    dispatch(getCommentList(videoId))
-  },[dispatch,videoId])
+  // useEffect(()=> {
+  //   dispatch(getCommentList(videoId))
+  // },[dispatch,videoId])
 
   return (
     <>
@@ -32,7 +32,7 @@ export default function Comments(videoId) {
           </div>
         </CommentsWrapper> :
         <CommentsWrapper>
-           <HalfMalf text={"Loading"} bgColor={"#ffffff"} width={"200px"} height={"200px"} center={true} />
+           <HalfMalf text={"Loading"} bgColor={'transparent'} width={"200px"} height={"200px"} center={false} />
         </CommentsWrapper>
       }
     </>
