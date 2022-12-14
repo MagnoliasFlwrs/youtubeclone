@@ -10,7 +10,6 @@ import 'react-spinner-animated/dist/index.css'
 import ShowMoreText from "react-show-more-text"
 
 export default function HorisontalVideoCard(video) {
-    console.log(video.video.snippet)
     const {video : {id, snippet: {channelTitle , title , publishedAt , thumbnails:{medium}}}} = video
     
     const currentideoId = id?.videoId || id

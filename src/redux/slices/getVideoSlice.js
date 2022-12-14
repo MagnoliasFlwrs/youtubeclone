@@ -63,6 +63,7 @@ export const getRelatedVideo =  createAsyncThunk('relatedVideo/getRelatedVideo',
     return rejectWithValue(e)
   }
 })
+
 const getVideoSlice = createSlice({
     name: 'video',
     initialState: {
