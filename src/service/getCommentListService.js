@@ -5,11 +5,12 @@ const getCommentListService = {
         const {data} = await request('/commentThreads' , {
             params: {
                 part: 'snippet',
-                id : videoId,
+                videoId: `${videoId}`,
             },
-
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('authToken')}`
+            }
         })
-        console.log(data)
         return data
     }
 }

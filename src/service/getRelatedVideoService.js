@@ -10,7 +10,6 @@ const getRelatedVideoService = {
                 type: 'video',
             }
         })
-        console.log(data)
 
         return data
     }

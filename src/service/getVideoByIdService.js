@@ -8,7 +8,6 @@ const getVideoDetailsByIdService = {
                 id:`${id}`,
             }
         })
-        console.log(data)
         return data
     }
 }

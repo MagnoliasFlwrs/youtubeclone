@@ -8,11 +8,17 @@ import { GoogleAuthProvider , getAuth , signInWithPopup } from "firebase/auth";
 import { app } from '../../firebase'
 import { useEffect } from 'react';
 import jwt_decode from 'jwt-decode'
+import { useState } from 'react';
 
+const SCOPES = 'https://www.googleapis.com/auth/youtube.force-ssl'
 
 export default function LoginLayout() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const [user,setUser] = useState({})
+  const [tokenClient ,setTokenClient] = useState({})
+
+
   // const loginHandler = async () => {
   //   const auth = getAuth(app);
   //   const provider = new GoogleAuthProvider();
@@ -45,28 +51,39 @@ export default function LoginLayout() {
 
   const handleCallBackResponse =(response) => {
     console.log(response)
-    const token = response.credential
     const userProfile = jwt_decode(response.credential)
-    localStorage.setItem('authToken', token)
+    setUser(userProfile)
     console.log(userProfile)
-    dispatch(getProfile({
-      profile:userProfile,
-    }))
-    navigate('/')
+
+  }
+  const signIn = () => {
+    tokenClient.requestAccessToken()
   }
   useEffect(() => {
-    window.google.accounts.id.initialize( {
+    const google = window.google
+
+    google.accounts.id.initialize( {
       client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
       callback: handleCallBackResponse,
-      scope: 'https://www.googleapis.com/auth/youtube.force-ssl \
-              https://www.googleapis.com/auth/documents.readonly',
     })
-    window.google.accounts.id.renderButton(
+
+    google.accounts.id.renderButton(
       document.getElementById('signInDiv'),
       {theme: 'outline' , size: 'large'}
     )
+    setTokenClient(google.accounts.oauth2.initTokenClient({
+      client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
+      scope: SCOPES,
+      callback: (tokenResponse) => {
+        console.log(tokenResponse)
+        const token = tokenResponse.access_token
+        localStorage.setItem('authToken', token)
+        navigate('/')
+      }
+    }))
 
   }, [])
+
   // const client = window.google.accounts.oauth2.initCodeClient({
   //   client_id: 'process.env.REACT_APP_GOOGLE_CLIENT_ID',
   //   scope: 'https://www.googleapis.com/auth/youtube.force-ssl',
@@ -77,8 +94,8 @@ export default function LoginLayout() {
     <div>
         <LoginContainer>
             <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg" alt="" width={450} height={150}/>
-            <div id='signInDiv'></div>
-            {/* <button onClick={client.requestCode()}>Authorize with Google</button> */}
+            <div  id='signInDiv'></div>
+            <button onClick={signIn}>Authorize with Google</button>
         </LoginContainer>
     </div>
   )

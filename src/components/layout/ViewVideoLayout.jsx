@@ -35,7 +35,7 @@ export default function ViewVideoLayout() {
                                 allowFullScreen width='100%' height='100%'></iframe>
                             </div>
                         <VideoDetails selectedVideo={selectedVideo}  videoId={id}/>
-                        <Comments videoId={id}/>
+                        <Comments/>
                     </div>
                     <div className='horisontal__wrapper'>
                             {relatedVideo.filter(video => video.snippet).map(video => <HorisontalVideoCard video ={video} key={video.id.videoId}> </HorisontalVideoCard>)}

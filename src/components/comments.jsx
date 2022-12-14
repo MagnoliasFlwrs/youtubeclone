@@ -8,19 +8,20 @@ import { getCommentList } from '../redux/slices/getVideoSlice'
 import { HalfMalf } from 'react-spinner-animated';
 import 'react-spinner-animated/dist/index.css'
 import { useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
 
 export default function Comments(videoId) {
   const dispatch = useDispatch()
+  const {id} = useParams()
   const {commentList , isLoading } = useSelector(state => state.video)
 
   useEffect(()=> {
-    dispatch(getCommentList(videoId))
-  },[dispatch,videoId])
-
+    dispatch(getCommentList(id))
+  },[dispatch,id])
   return (
     <>
       {
-        !isLoading?
+        isLoading?
         <CommentsWrapper>
           <p>{numeral(10000).format('0.a')} comments</p>
           <div className='input__wrap'>
@@ -28,7 +29,7 @@ export default function Comments(videoId) {
               <input type="text" placeholder=' add comment' />
           </div>
           <div className='comment__list'>
-              {commentList.map(() => <CommentCard/>)}
+              {commentList?.map((comment) => <CommentCard comment={comment} key={comment.id}/>)}
           </div>
         </CommentsWrapper> :
         <CommentsWrapper>
