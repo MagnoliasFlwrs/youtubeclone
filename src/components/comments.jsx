@@ -13,9 +13,9 @@ export default function Comments(videoId) {
   const dispatch = useDispatch()
   const {commentList , isLoading } = useSelector(state => state.video)
 
-  // useEffect(()=> {
-  //   dispatch(getCommentList(videoId))
-  // },[dispatch,videoId])
+  useEffect(()=> {
+    dispatch(getCommentList(videoId))
+  },[dispatch,videoId])
 
   return (
     <>
@@ -28,7 +28,7 @@ export default function Comments(videoId) {
               <input type="text" placeholder=' add comment' />
           </div>
           <div className='comment__list'>
-              {[...Array(10)].map(() => <CommentCard/>)}
+              {commentList.map(() => <CommentCard/>)}
           </div>
         </CommentsWrapper> :
         <CommentsWrapper>
