@@ -2,23 +2,23 @@ import React from 'react'
 import styled from 'styled-components'
 import { BiLike , BiDislike } from 'react-icons/bi'
 import numeral from 'numeral'
+import moment from 'moment'
 import ShowMoreText from "react-show-more-text"
 import { HalfMalf } from 'react-spinner-animated';
 import 'react-spinner-animated/dist/index.css'
 
 
 export default function CommentCard(comment) {
-    console.log(comment)
-    // const {snippet : {topLevelComment : {snippet:{authorDisplayName , authorProfileImageUrl, textDisplay, publishedAt, likeCount} }}} = comment
+    const {comment:{snippet : {topLevelComment : {snippet:{authorDisplayName , authorProfileImageUrl, textDisplay, publishedAt, likeCount} }}}} =  comment
   return (
     <>
-        {comment?
+        {
             <CommentCardContainer>
-            <img src="" alt="" />
+            <img src={authorProfileImageUrl} alt="" />
             <div>
                 <div className='card__wrap'>
-                    <span>author</span>
-                    <span>published at</span>
+                    <span>{authorDisplayName}</span>
+                    <span>{moment(publishedAt).fromNow()}</span>
                 </div>
                 <ShowMoreText
                     lines={3}
@@ -29,16 +29,14 @@ export default function CommentCard(comment) {
                     expanded={false}
                     width={280}
                     truncatedEndingComponent={"... "}>
-                    <p>comment</p>
+                    <p>{textDisplay}</p>
                 </ShowMoreText>
                 <div className='comment__likes'>
-                    <span><BiLike/> {numeral(10000).format('0.a')} </span>   <BiDislike/>
+                    <span><BiLike/> {numeral(likeCount).format('0.a')} </span>   <BiDislike/>
                 </div>
             </div>
-            </CommentCardContainer>:
-            <CommentCardContainer>
-                <HalfMalf text={"Loading"} bgColor={'transparent'} width={"200px"} height={"200px"} center={false} />
             </CommentCardContainer>
+            
 
     }
     </>

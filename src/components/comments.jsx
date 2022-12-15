@@ -10,7 +10,7 @@ import 'react-spinner-animated/dist/index.css'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
-export default function Comments(videoId) {
+export default function Comments() {
   const dispatch = useDispatch()
   const {id} = useParams()
   const {commentList , isLoading } = useSelector(state => state.video)
@@ -21,7 +21,7 @@ export default function Comments(videoId) {
   return (
     <>
       {
-        isLoading?
+        
         <CommentsWrapper>
           <p>{numeral(10000).format('0.a')} comments</p>
           <div className='input__wrap'>
@@ -29,12 +29,10 @@ export default function Comments(videoId) {
               <input type="text" placeholder=' add comment' />
           </div>
           <div className='comment__list'>
-              {commentList?.map((comment) => <CommentCard comment={comment} key={comment.id}/>)}
+              {commentList.map((comment) => <CommentCard comment={comment} key={comment.id}/>)}
           </div>
-        </CommentsWrapper> :
-        <CommentsWrapper>
-           <HalfMalf text={"Loading"} bgColor={'transparent'} width={"200px"} height={"200px"} center={false} />
-        </CommentsWrapper>
+        </CommentsWrapper> 
+        
       }
     </>
   )
