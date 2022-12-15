@@ -50,11 +50,10 @@ export default function LoginLayout() {
   // }
 
   const handleCallBackResponse =(response) => {
-    console.log(response)
     const userProfile = jwt_decode(response.credential)
     setUser(userProfile)
+    localStorage.setItem('profile', JSON.stringify(userProfile))
     console.log(userProfile)
-
   }
   const signIn = () => {
     tokenClient.requestAccessToken()
@@ -75,14 +74,14 @@ export default function LoginLayout() {
       client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
       scope: SCOPES,
       callback: (tokenResponse) => {
-        console.log(tokenResponse)
         const token = tokenResponse.access_token
         localStorage.setItem('authToken', token)
         navigate('/')
       }
     }))
-
   }, [])
+
+
 
   // const client = window.google.accounts.oauth2.initCodeClient({
   //   client_id: 'process.env.REACT_APP_GOOGLE_CLIENT_ID',

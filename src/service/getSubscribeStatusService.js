@@ -5,7 +5,8 @@ const getSubscribeStatusService = {
         const {data} = await request('/channels' , {
             params: {
                 part: 'snippet, contentDetails,statistics',
-                forChannelId: channelId,
+                mine: true,
+                forChannelId: `${channelId}`,
             },
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('authToken')}`

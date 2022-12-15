@@ -9,7 +9,7 @@ import SearchLayout from "./components/layout/SearchLayout";
 
 function App() {
   const navigate = useNavigate();
-  const token = useSelector((state) => state.auth.token);
+  const token = localStorage.getItem('authToken')
   useEffect(() => {
     if (!token) {
       navigate("auth");

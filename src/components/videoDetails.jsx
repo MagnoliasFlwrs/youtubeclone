@@ -16,6 +16,7 @@ export default function VideoDetails( {selectedVideo ,videoId}) {
     const dispatch = useDispatch()
 
     const {subscribeStatus , currentChannel } = useSelector(state => state.video)
+    console.log(subscribeStatus)
     const {snippet:channelSnippet , statistics: channelStatistics} = currentChannel
     const __subscribeStatus = subscribeStatus.length !== 0
 
@@ -71,6 +72,7 @@ export default function VideoDetails( {selectedVideo ,videoId}) {
                         </p>
                     </ShowMoreText>
                 </div>
+                <p>{numeral(commentCount).format('0.a')} comments</p>
                 <div>
 
                 </div>

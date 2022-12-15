@@ -31,6 +31,7 @@ function Sidebar() {
     // }
     const logOutHandler = () => {
         localStorage.removeItem('authToken')
+        localStorage.removeItem('profile')
         dispatch(logOut({
             isAuth: false,
             id: null,

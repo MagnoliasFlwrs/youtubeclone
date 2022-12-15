@@ -5,6 +5,8 @@ import Flex from "./Flex";
 import { useNavigate } from "react-router";
 
 function ContainerForHeader() {
+    const profile = localStorage.getItem('profile')
+    const _profile = JSON.parse(profile)
     const [input, setInput] = useState('')
     const navigate = useNavigate()
     const handleStart = () => {
@@ -21,14 +23,20 @@ function ContainerForHeader() {
          }
     }
     return (
-        <FlexCont>
-            <img onClick={handleStart} src="https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg" alt="" width={150} height={50}/>
-            <InputContainer >
-                <input onKeyDown={handleKeyDown} type="text" placeholder="Введите запрос" value={input} onChange={e =>setInput(e.target.value) }/>
-                <button onClick={handleSubmit} type="submit"><BiSearch/></button>
-            </InputContainer>
-            <AuthBtn/>
-        </FlexCont>
+        <>
+            {
+
+                <FlexCont>
+                    <img onClick={handleStart} src="https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg" alt="" width={150} height={50}/>
+                    <InputContainer >
+                        <input onKeyDown={handleKeyDown} type="text" placeholder="Введите запрос" value={input} onChange={e =>setInput(e.target.value) }/>
+                        <button onClick={handleSubmit} type="submit"><BiSearch/></button>
+                    </InputContainer>
+                    <img className="userpicture" src={_profile.picture} alt="" />
+                </FlexCont>
+
+            }
+        </>
     )
 
 }
@@ -36,6 +44,12 @@ const FlexCont = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
+    .userpicture {
+        width: 45px;
+        height: 45px;
+        border: none;
+        border-radius: 50px;
+    }
 `
 const InputContainer = styled.div`
     display: flex;

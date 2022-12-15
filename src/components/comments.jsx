@@ -9,30 +9,43 @@ import { HalfMalf } from 'react-spinner-animated';
 import 'react-spinner-animated/dist/index.css'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import { useState } from 'react'
+import addCommentService from '../service/addCommentService'
+
 
 export default function Comments() {
   const dispatch = useDispatch()
   const {id} = useParams()
+  const profile = localStorage.getItem('profile')
+  const _profile = JSON.parse(profile)
   const {commentList , isLoading } = useSelector(state => state.video)
+  const [value, setValue] = useState('')
 
   useEffect(()=> {
     dispatch(getCommentList(id))
   },[dispatch,id])
+
+  const addComment = (e) => {
+    if (e.keyCode === 13) {
+      addCommentService.addComment(id,value)
+      setValue('')
+      setTimeout(()=> dispatch(getCommentList(id)),3000)   }
+  }
+
   return (
     <>
       {
-        
+
         <CommentsWrapper>
-          <p>{numeral(10000).format('0.a')} comments</p>
           <div className='input__wrap'>
-              <img src="" alt="" />
-              <input type="text" placeholder=' add comment' />
+              <img src={_profile.picture} alt="" />
+              <input onKeyDown={addComment} value={value} onChange={e =>setValue(e.target.value)} type="text" placeholder=' add comment' />
           </div>
           <div className='comment__list'>
               {commentList.map((comment) => <CommentCard comment={comment} key={comment.id}/>)}
           </div>
-        </CommentsWrapper> 
-        
+        </CommentsWrapper>
+
       }
     </>
   )
@@ -53,6 +66,10 @@ const CommentsWrapper = styled.div`
       height: 35px;
       border:none;
       border-bottom: 1px solid #dcdcdc;
+      &&:focus {
+        border: none;
+        outline: none;
+      }
     }
   }
 
