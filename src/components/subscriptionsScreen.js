@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { useDispatch, useSelector } from "react-redux";
-import { getLikedVideo } from "../redux/slices/getVideoSlice";
+import { getSubscriptionsList } from "../redux/slices/getVideoSlice";
 import ChannelCard from './channelcard'
 
 
@@ -10,9 +10,11 @@ export default function SubscriptionsScreen() {
     const dispath =  useDispatch()
     const {subscriptionsList} = useSelector(state => state.video)
     
+    
   useEffect(() => {
-      dispath(getLikedVideo())
+      dispath(getSubscriptionsList())
   },[dispath])
+  console.log(subscriptionsList)
   return (
     <Container>
         {subscriptionsList.map((video) => <ChannelCard video={video} key={video.id}/>)}

@@ -8,6 +8,7 @@ import ViewVideoLayout from "./components/layout/ViewVideoLayout";
 import SearchLayout from "./components/layout/SearchLayout";
 import LikedScreen from './components/likedScreen'
 import SubscriptionsScreen from './components/subscriptionsScreen'
+import ChannelScreen from './components/channelScreen'
 
 function App() {
   const navigate = useNavigate();
@@ -24,6 +25,7 @@ function App() {
         <Route path="search/:query" element={<SearchLayout />} />
         <Route path="liked" element={<LikedScreen />} />
         <Route path="subscriptions" element={<SubscriptionsScreen />} />
+        <Route path="channel/:channelId" element={<ChannelScreen/>} />
       </Route>
       <Route path="watch/:id" element={<ViewVideoLayout />} />
       <Route path="auth" element={<LoginLayout />} />
