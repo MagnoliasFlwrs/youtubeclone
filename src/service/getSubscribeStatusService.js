@@ -2,9 +2,9 @@ import request from './api'
 
 const getSubscribeStatusService = {
     async getStatus(channelId) {
-        const {data} = await request('/channels' , {
+        const {data} = await request('/subscriptions' , {
             params: {
-                part: 'snippet, contentDetails,statistics',
+                part: 'snippet',
                 mine: true,
                 forChannelId: `${channelId}`,
             },

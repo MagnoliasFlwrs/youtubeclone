@@ -7,6 +7,7 @@ import getSubscribeStatusService from "../../service/getSubscribeStatusService";
 import getCommentListService from "../../service/getCommentListService";
 import getRelatedVideoService from "../../service/getRelatedVideoService"
 import getLikedVideoService from '../../service/getLikedVideoService'
+import getSubscriptionsService from '../../service/getSubscriptionsService'
 
 export const getPopularVideo =  createAsyncThunk('popularVideo/getPopularVideo', async ( _, {rejectWithValue}) => {
     try {
@@ -72,6 +73,14 @@ export const getLikedVideo =  createAsyncThunk('likedVideo/getLikedVideo', async
     return rejectWithValue(e)
   }
 })
+export const getSubscriptionsList =  createAsyncThunk('subscriptionsList/getLikegetSubscriptionsListdVideo', async ( _, {rejectWithValue}) => {
+  try {
+    const result = await getSubscriptionsService.getAll()
+    return result.items
+  } catch (e) {
+    return rejectWithValue(e)
+  }
+})
 
 const getVideoSlice = createSlice({
     name: 'video',
@@ -87,6 +96,7 @@ const getVideoSlice = createSlice({
       commentList:[],
       relatedVideo:[],
       likedVideoList:[],
+      subscriptionsList:[],
     },
     extraReducers: {
         [getPopularVideo.pending]: (state, action) => {

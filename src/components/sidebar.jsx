@@ -46,7 +46,7 @@ function Sidebar() {
                 <NavLink to=""><AiTwotoneHome/> Главная</NavLink>
             </LinkWrapper>
             <LinkWrapper>
-                <NavLink to=""><MdOutlineSubscriptions/> Подписки</NavLink>
+                <NavLink to="subscriptions"><MdOutlineSubscriptions/> Подписки</NavLink>
             </LinkWrapper>
             <LinkWrapper>
                 <NavLink to="liked"><AiFillLike/> Понравилось</NavLink>
