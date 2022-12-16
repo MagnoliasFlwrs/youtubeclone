@@ -6,6 +6,8 @@ import getVideoChannelDetailsService from "../../service/getVideoChannelDetailsS
 import getSubscribeStatusService from "../../service/getSubscribeStatusService";
 import getCommentListService from "../../service/getCommentListService";
 import getRelatedVideoService from "../../service/getRelatedVideoService"
+import getLikedVideoService from '../../service/getLikedVideoService'
+import getSubscriptionsService from '../../service/getSubscriptionsService'
 
 export const getPopularVideo =  createAsyncThunk('popularVideo/getPopularVideo', async ( _, {rejectWithValue}) => {
     try {
@@ -63,6 +65,22 @@ export const getRelatedVideo =  createAsyncThunk('relatedVideo/getRelatedVideo',
     return rejectWithValue(e)
   }
 })
+export const getLikedVideo =  createAsyncThunk('likedVideo/getLikedVideo', async ( _, {rejectWithValue}) => {
+  try {
+    const result = await getLikedVideoService.getAll()
+    return result.items
+  } catch (e) {
+    return rejectWithValue(e)
+  }
+})
+export const getSubscriptionsList =  createAsyncThunk('subscriptionsList/getLikegetSubscriptionsListdVideo', async ( _, {rejectWithValue}) => {
+  try {
+    const result = await getSubscriptionsService.getAll()
+    return result.items
+  } catch (e) {
+    return rejectWithValue(e)
+  }
+})
 
 const getVideoSlice = createSlice({
     name: 'video',
@@ -77,6 +95,8 @@ const getVideoSlice = createSlice({
       subscribeStatus: [],
       commentList:[],
       relatedVideo:[],
+      likedVideoList:[],
+      subscriptionsList:[],
     },
     extraReducers: {
         [getPopularVideo.pending]: (state, action) => {
@@ -151,6 +171,16 @@ const getVideoSlice = createSlice({
             state.isLoading = false
         },
         [getRelatedVideo.rejected]: (state, action) => {
+            state.error = action.payload.message
+        },
+        [getLikedVideo.pending]: (state, action) => {
+          state.isLoading = true
+        },
+        [getLikedVideo.fulfilled]: (state, action) => {
+            state.likedVideoList = action.payload
+            state.isLoading = false
+        },
+        [getLikedVideo.rejected]: (state, action) => {
             state.error = action.payload.message
         },
 

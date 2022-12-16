@@ -26,6 +26,7 @@ function ContainerForHeader() {
         <>
             {
 
+                _profile? 
                 <FlexCont>
                     <img onClick={handleStart} src="https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg" alt="" width={150} height={50}/>
                     <InputContainer >
@@ -33,8 +34,9 @@ function ContainerForHeader() {
                         <button onClick={handleSubmit} type="submit"><BiSearch/></button>
                     </InputContainer>
                     <img className="userpicture" src={_profile.picture} alt="" />
-                </FlexCont>
-
+                </FlexCont> : 
+                <h1/>
+                    
             }
         </>
     )

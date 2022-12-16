@@ -6,6 +6,8 @@ import HomeVideoScreen from "./components/HomeVideoScreen";
 import { useSelector } from "react-redux";
 import ViewVideoLayout from "./components/layout/ViewVideoLayout";
 import SearchLayout from "./components/layout/SearchLayout";
+import LikedScreen from './components/likedScreen'
+import SubscriptionsScreen from './components/subscriptionsScreen'
 
 function App() {
   const navigate = useNavigate();
@@ -20,6 +22,8 @@ function App() {
       <Route path="/" element={<MainLayout />}>
         <Route path="" element={<HomeVideoScreen />} />
         <Route path="search/:query" element={<SearchLayout />} />
+        <Route path="liked" element={<LikedScreen />} />
+        <Route path="subscriptions" element={<SubscriptionsScreen />} />
       </Route>
       <Route path="watch/:id" element={<ViewVideoLayout />} />
       <Route path="auth" element={<LoginLayout />} />

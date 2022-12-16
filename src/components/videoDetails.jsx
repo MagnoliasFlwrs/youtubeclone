@@ -18,7 +18,7 @@ export default function VideoDetails( {selectedVideo ,videoId}) {
     const {subscribeStatus , currentChannel } = useSelector(state => state.video)
     console.log(subscribeStatus)
     const {snippet:channelSnippet , statistics: channelStatistics} = currentChannel
-    const __subscribeStatus = subscribeStatus.length !== 0
+    
 
     useEffect(()=> {
         dispatch(getVideoChannelDetails(channelId))
@@ -41,7 +41,7 @@ export default function VideoDetails( {selectedVideo ,videoId}) {
                             <h3>{channelTitle}</h3>
                             <p> {numeral(channelStatistics?.subscriberCount).format('0.a')} подписчиков</p>
                         </div>
-                        <button className={__subscribeStatus? 'gray__btn' : 'black__btn'} onClick={handleSubscribe}>{__subscribeStatus? 'Вы подписаны' : 'Подписаться'}</button>
+                        <button className={ subscribeStatus.length===0 ? 'black__btn' : 'gray__btn'} onClick={handleSubscribe}>{subscribeStatus.length===0? 'Подписаться' : 'Вы подписаны'}</button>
                     </div>
                     <div className='liked'>
                         <div className='like__wrap'>
@@ -121,6 +121,7 @@ const VideoDetailsContainer = styled.div`
         border-radius: 20px;
         background-color: #000000;
         color: #ffffff;
+        border: none;
         text-align: center;
         margin-left: 20px;
     }
@@ -128,8 +129,9 @@ const VideoDetailsContainer = styled.div`
         width: 200px;
         height: 40px;
         border-radius: 20px;
-        background-color: #000000;
-        color: #dcdcdc;
+        border: none;
+        color: #000000;
+        background-color: #dcdcdc;
         text-align: center;
         margin-left: 20px;
     }
