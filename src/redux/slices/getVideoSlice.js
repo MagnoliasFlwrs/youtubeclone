@@ -183,6 +183,16 @@ const getVideoSlice = createSlice({
         [getLikedVideo.rejected]: (state, action) => {
             state.error = action.payload.message
         },
+        [getSubscriptionsList.pending]: (state, action) => {
+          state.isLoading = true
+        },
+        [getSubscriptionsList.fulfilled]: (state, action) => {
+            state.subscriptionsList = action.payload
+            state.isLoading = false
+        },
+        [getSubscriptionsList.rejected]: (state, action) => {
+            state.error = action.payload.message
+        },
 
 
     }

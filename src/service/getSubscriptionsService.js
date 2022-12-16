@@ -2,11 +2,11 @@ import request from './api'
 
 const getSubscriptionsService = {
     async getAll() {
-        const {data} = await request('/videos' , {
+        const {data} = await request('/subscriptions' , {
             params: {
-                part: 'snippet, contentDetails,statistics',
-                myRating: 'like',
-                maxResults : 20,
+                part: 'snippet, contentDetails',
+                mine:true,
+                maxResults:20,
             },
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('authToken')}`
