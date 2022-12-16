@@ -49,7 +49,7 @@ function Sidebar() {
                 <NavLink to=""><MdOutlineSubscriptions/> Подписки</NavLink>
             </LinkWrapper>
             <LinkWrapper>
-                <NavLink to=""><AiFillLike/> Понравилось</NavLink>
+                <NavLink to="liked"><AiFillLike/> Понравилось</NavLink>
             </LinkWrapper>
             <LinkWrapper>
                 <NavLink to=""><BsClockHistory/>  История</NavLink>
