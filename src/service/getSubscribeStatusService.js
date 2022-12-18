@@ -13,7 +13,6 @@ const getSubscribeStatusService = {
             }
 
         })
-        console.log(data)
         return data
     }
 }

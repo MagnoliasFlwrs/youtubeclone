@@ -9,16 +9,15 @@ import ChannelCard from './channelcard'
 export default function SubscriptionsScreen() {
     const dispath =  useDispatch()
     const {subscriptionsList} = useSelector(state => state.video)
-    
-    
+
+
   useEffect(() => {
       dispath(getSubscriptionsList())
   },[dispath])
-  console.log(subscriptionsList)
   return (
     <Container>
         {subscriptionsList.map((video) => <ChannelCard video={video} key={video.id}/>)}
-    </Container>  
+    </Container>
   )
 }
 

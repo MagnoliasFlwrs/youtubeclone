@@ -29,7 +29,7 @@ export default function Comments() {
     if (e.keyCode === 13) {
       addCommentService.addComment(id,value)
       setValue('')
-      setTimeout(()=> dispatch(getCommentList(id)),3000)   }
+      setTimeout(()=> dispatch(getCommentList(id)),2000)   }
   }
 
   return (

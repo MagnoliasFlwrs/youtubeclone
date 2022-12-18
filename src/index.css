@@ -1,5 +1,36 @@
+/* :root {
+  --background-color: #ffffff;
+  --text-primery: #000000;
+  --text-secondary: gray;
+}
+[data-theme='dark'] {
+  --background-color: #000000;
+  --text-primery: #ffffff;
+  --text-secondary: gray;
+} */
+
+
+
+#light {
+  background-color: #ffffff;
+}
+#dark {
+  background-color: #414141;
+}
+#dark .wrapper__login {
+  background-color:#4f4f4f ;
+}
+#dark h1 , #dark h2 , #dark h3 , #dark h5 , #dark p , #dark span , #dark a{
+  color: #ffffff;
+}
+#dark .search__card , #dark .content-css span , #dark .span__wrapper span  {
+  color: #000000;
+}
+
+
+
+
 body {
-  margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -13,4 +44,10 @@ code {
 }
 main {
   overflow: hidden;
+}
+.app {
+  background-color: var(--background-color) ;
+  color: var(--text-primery);
+  transition: all 0.5 ease;
+  min-height: 100vh;
 }

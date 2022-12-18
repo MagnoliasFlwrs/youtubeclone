@@ -8,6 +8,7 @@ import getCommentListService from "../../service/getCommentListService";
 import getRelatedVideoService from "../../service/getRelatedVideoService"
 import getLikedVideoService from '../../service/getLikedVideoService'
 import getSubscriptionsService from '../../service/getSubscriptionsService'
+import getUploadsListService from "../../service/getUploadsListService";
 
 export const getPopularVideo =  createAsyncThunk('popularVideo/getPopularVideo', async ( _, {rejectWithValue}) => {
     try {
@@ -81,6 +82,14 @@ export const getSubscriptionsList =  createAsyncThunk('subscriptionsList/getLike
     return rejectWithValue(e)
   }
 })
+export const getUploadsList =  createAsyncThunk('uploadsList/getUploadsList', async ( uploads, {rejectWithValue}) => {
+  try {
+    const result = await getUploadsListService.getAll(uploads)
+    return result.items
+  } catch (e) {
+    return rejectWithValue(e)
+  }
+})
 
 const getVideoSlice = createSlice({
     name: 'video',
@@ -97,6 +106,7 @@ const getVideoSlice = createSlice({
       relatedVideo:[],
       likedVideoList:[],
       subscriptionsList:[],
+      uploadList:[],
     },
     extraReducers: {
         [getPopularVideo.pending]: (state, action) => {
@@ -191,6 +201,16 @@ const getVideoSlice = createSlice({
             state.isLoading = false
         },
         [getSubscriptionsList.rejected]: (state, action) => {
+            state.error = action.payload.message
+        },
+        [getUploadsList.pending]: (state, action) => {
+          state.isLoading = true
+        },
+        [getUploadsList.fulfilled]: (state, action) => {
+            state.uploadList = action.payload
+            state.isLoading = false
+        },
+        [getUploadsList.rejected]: (state, action) => {
             state.error = action.payload.message
         },
 

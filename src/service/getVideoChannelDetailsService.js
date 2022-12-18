@@ -8,7 +8,6 @@ const getVideoChannelDetailsService = {
                 id:`${channelId}`,
             }
         })
-        console.log(data)
         return data
     }
 }

@@ -27,19 +27,18 @@ export default function HomeVideoScreen() {
       </VideoContainer>
       :
         <VideoContainer>
-          <HalfMalf text={"Loading"} bgColor={"#ffffff"} width={"200px"} height={"200px"} center={true} />
+          <HalfMalf text={"Loading"} bgColor={"transparent"} width={"200px"} height={"200px"} center={true} />
         </VideoContainer>
       }
     </>
   )
 }
 const VideoContainer = styled.div`
-    width: 80%;
-    height: 100%;
+    flex:1;
     padding: 0 30px;
     display: flex;
     justify-content: space-between;
-    overflow-y: auto;
+    overflow:auto;
     padding: 0 20px;
     flex-wrap: wrap;
 

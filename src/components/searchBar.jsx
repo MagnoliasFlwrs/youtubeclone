@@ -18,6 +18,7 @@ const keywords = [
 ]
 export default function () {
     const [activeElement , setActiveElement] = useState('All')
+
     const dispath = useDispatch()
     const handleClick = value => {
         setActiveElement(value)
@@ -40,6 +41,7 @@ const SearchBar = styled.div`
         padding: 5px 15px;
         border-radius: 7px;
         background-color: #dcdcdc;
+        color: #000000;
     }
     .search__card__active {
         padding: 5px 15px;

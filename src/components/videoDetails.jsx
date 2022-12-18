@@ -9,16 +9,16 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getVideoChannelDetails } from '../redux/slices/getVideoSlice'
 import { getSubscribeStatus } from '../redux/slices/getVideoSlice'
 import { HalfMalf } from 'react-spinner-animated';
-import 'react-spinner-animated/dist/index.css'
+import 'react-spinner-animated/dist/index.css';
+import likeService from '../service/likeService'
 
 export default function VideoDetails( {selectedVideo ,videoId}) {
     const {snippet: {channelId , description, channelTitle, title, publishedAt} , statistics:{viewCount, likeCount, commentCount}} = selectedVideo
     const dispatch = useDispatch()
 
     const {subscribeStatus , currentChannel } = useSelector(state => state.video)
-    console.log(subscribeStatus)
     const {snippet:channelSnippet , statistics: channelStatistics} = currentChannel
-    
+
 
     useEffect(()=> {
         dispatch(getVideoChannelDetails(channelId))
@@ -28,11 +28,14 @@ export default function VideoDetails( {selectedVideo ,videoId}) {
     const handleSubscribe = () => {
 
     }
+    const setLike = (videoId) => {
+        likeService(videoId)
+    }
   return (
     <>
         {
             currentChannel && subscribeStatus ?
-                    <VideoDetailsContainer >
+            <VideoDetailsContainer >
                 <h2>{title}</h2>
                 <div className='info__details'>
                     <div className='channel__info'>
@@ -44,7 +47,7 @@ export default function VideoDetails( {selectedVideo ,videoId}) {
                         <button className={ subscribeStatus.length===0 ? 'black__btn' : 'gray__btn'} onClick={handleSubscribe}>{subscribeStatus.length===0? 'Подписаться' : 'Вы подписаны'}</button>
                     </div>
                     <div className='liked'>
-                        <div className='like__wrap'>
+                        <div className='like__wrap' onClick = {setLike}>
                             <BiLike/> {numeral(likeCount).format('0.a')}
                         </div>
                         <div className='like__wrap sec'>
@@ -68,7 +71,7 @@ export default function VideoDetails( {selectedVideo ,videoId}) {
                         width={280}
                         truncatedEndingComponent={"... "}>
 
-                        <p>{description}
+                        <p className='descr'>{description}
                         </p>
                     </ShowMoreText>
                 </div>
