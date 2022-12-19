@@ -9,7 +9,7 @@ import { useNavigate } from "react-router";
 export default function VideoCard( {video}) {
 
     const {id, snippet:{channelId , channelTitle, title, publishedAt, thumbnails:{medium}}} = video
-    const currentideoId =  video?.contentDetails?.videoId ? video.contentDetails.videoId : id
+    const currentideoId =  video?.contentDetails?.videoId ? video.contentDetails.videoId : id?.videoId ? id.videoId : id
     const navigate = useNavigate()
 
     const handleClickVideo = () => {
