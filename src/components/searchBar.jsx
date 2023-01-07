@@ -3,6 +3,7 @@ import React from 'react'
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getCategoryVideo } from "../redux/slices/getVideoSlice";
+import { useEffect } from "react";
 
 
 const keywords = [
@@ -20,10 +21,12 @@ export default function () {
     const [activeElement , setActiveElement] = useState('All')
 
     const dispath = useDispatch()
-    const handleClick = value => {
+    const handleClick = (value) => {
         setActiveElement(value)
         dispath(getCategoryVideo(value))
     }
+
+
   return (
     <SearchBar>
         {

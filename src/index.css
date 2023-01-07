@@ -26,6 +26,9 @@
 #dark .search__card , #dark .content-css span , #dark .span__wrapper span  {
   color: #000000;
 }
+#signInDiv {
+  /* display: none; */
+}
 
 
 
