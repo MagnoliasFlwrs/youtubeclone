@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getPopularVideo } from '../redux/slices/getVideoSlice';
 import VideoCard from './VideoCard';
-import SearchBar from './searchBar';
+import SearchCategoryBar from './searchBar';
 import { HalfMalf } from 'react-spinner-animated';
 import 'react-spinner-animated/dist/index.css'
 
@@ -22,7 +22,7 @@ export default function HomeVideoScreen() {
       {
         !isLoading?
         <VideoContainer>
-          <SearchBar/>
+          <SearchCategoryBar/>
           {videoList?.map((video) => (<VideoCard video={video} key={video.id}> </VideoCard>))}
       </VideoContainer>
       :

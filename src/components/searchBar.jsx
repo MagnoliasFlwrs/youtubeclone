@@ -17,7 +17,7 @@ const keywords = [
     'fitness',
     'music'
 ]
-export default function () {
+export default function SearchCategoryBar() {
     const [activeElement , setActiveElement] = useState('All')
 
     const dispath = useDispatch()
@@ -35,6 +35,7 @@ export default function () {
     </SearchBar>
   )
 }
+
 const SearchBar = styled.div`
     width: 100%;
     display: flex;
